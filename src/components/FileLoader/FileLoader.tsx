@@ -3,6 +3,7 @@ import Dropzone from 'react-dropzone';
 import Icon from 'components/Icon';
 import Link from 'components/Link';
 import * as styles from './styles';
+import { Diff } from 'utility-types';
 
 interface FileLoaderProps {
   /**
@@ -51,7 +52,7 @@ interface FileLoaderProps {
  * A file input component which accepts drag-and-drop.
  */
 export default class FileLoader extends React.Component<
-  FileLoaderProps & React.HTMLAttributes<HTMLDivElement>
+  FileLoaderProps & Diff<React.HTMLAttributes<HTMLDivElement>, FileLoaderProps>
 > {
   static defaultProps = {
     required: false,
@@ -108,11 +109,11 @@ export default class FileLoader extends React.Component<
     return (
       <Dropzone
         multiple={false}
-        onDrop={files => onChange(files)}
+        onDrop={(files => onChange(files)) as any}
         style={{ width: '100%' }}
         activeStyle={{ color: '#00bcec' }}
         rejectStyle={{}}
-        value={value}
+        value={value as any}
         required={required}
         disabled={disabled}
         className={className}
